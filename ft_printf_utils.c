@@ -6,7 +6,7 @@
 /*   By: mohtakra <mohtakra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/13 21:45:36 by mohtakra          #+#    #+#             */
-/*   Updated: 2022/11/14 03:52:22 by mohtakra         ###   ########.fr       */
+/*   Updated: 2022/11/14 20:30:42 by mohtakra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,10 +36,9 @@ void	ft_nbrhexa(unsigned int nbr, int *countchars, char type)
 	char	hexnum;
 
 	if (type == 'x' || type == 'p')
-    	hexnum = "0123456789abcdef"[nbr % 16];
+		hexnum = "0123456789abcdef"[nbr % 16];
 	else if (type == 'X')
 		hexnum = "0123456789ABCDEF"[nbr % 16];
-	
 	if (nbr >= 0 && nbr < 16)
 	{
 		ft_putchar_fd(hexnum, 1);

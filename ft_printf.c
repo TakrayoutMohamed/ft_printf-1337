@@ -6,7 +6,7 @@
 /*   By: mohtakra <mohtakra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/13 19:08:38 by mohtakra          #+#    #+#             */
-/*   Updated: 2022/11/14 03:52:37 by mohtakra         ###   ########.fr       */
+/*   Updated: 2022/11/14 04:12:21 by mohtakra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ int	ft_printf(const char *str, ...)
 	va_list				ptr;
 	char				*helper_str;
 	int					helper_nbr;
-	unsigned int		helper_unbr;
 
 	chars_count = 0;
 	va_start(ptr, str);
@@ -52,7 +51,7 @@ int	ft_printf(const char *str, ...)
 			else if (*str == 'X' || *str == 'x' || *str == 'p')
 			{
 				if (*str == 'p')
-					ft_putstr_fd("0x",1);
+					ft_putstr_fd("0x", 1);
 				ft_nbrhexa(va_arg(ptr, int), &chars_count, *str);
 			}
 			else if (*str == 'u')
@@ -64,6 +63,5 @@ int	ft_printf(const char *str, ...)
 		}
 		str++;
 	}
-	
 	return (chars_count);
 }
