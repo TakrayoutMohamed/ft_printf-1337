@@ -6,7 +6,7 @@
 /*   By: mohtakra <mohtakra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/13 19:08:38 by mohtakra          #+#    #+#             */
-/*   Updated: 2022/11/15 23:07:21 by mohtakra         ###   ########.fr       */
+/*   Updated: 2022/11/16 00:28:37 by mohtakra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,16 +26,12 @@ int	ft_printf(const char *str, ...)
 			caseof_xs_d_i_c(*str, &chars_count, 'c');
 		else
 		{
-			if (*(str + 1) == '\0')
-				return (chars_count);
 			str++;
-			if (*str == '%')
-				caseof_xs_d_i_c('%', &chars_count, 'c');
-			else
-			{
+			if (*str == '\0')
+				return (chars_count);
+			if (*str != '%')
 				va_arg = va_arg(ptr, void *);
-				print(va_arg, &chars_count, *str);
-			}
+			print(va_arg, &chars_count, *str);
 		}
 		str++;
 	}
