@@ -6,18 +6,54 @@
 /*   By: mohtakra <mohtakra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/13 19:08:38 by mohtakra          #+#    #+#             */
-/*   Updated: 2022/11/15 06:05:21 by mohtakra         ###   ########.fr       */
+/*   Updated: 2022/11/15 19:52:06 by mohtakra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
+void	caseof_s(char *str, int *increase)
+{
+	if (str == NULL)
+		str = "(null)";
+	ft_putstr_fd(str, 1);
+	*increase += ft_strlen(str);
+}
+
+void	caseof_xs_d_i(int nbr, int *increase, char type)
+{
+	if (type == 'x' || type == 'X')
+		ft_nbrhexa(nbr, increase, type);
+	else if (type == 'd' || type == 'i')
+	{
+		*increase += ft_numberlen(nbr);
+		ft_putnbr_fd(nbr, 1);
+	}
+	else if (type == 'c')
+	{
+		if (nbr == 0)
+			nbr = '\0';
+		*increase += 1;
+		ft_putchar_fd((char)nbr, 1);
+	}
+}
+
+void	caseof_p(unsigned long ulnbr, int *increase)
+{
+	ft_putstr_fd("0x", 1);
+	*increase += 2;
+	ft_nbrhexa_p(ulnbr, increase);
+}
+void	caseof_u(unsigned int unbr, int *increase)
+{
+	ft_putunbr_fd(unbr, 1);
+	*increase += ft_unumberlen(unbr);
+}
+
 int	ft_printf(const char *str, ...)
 {
 	int					chars_count;
 	va_list				ptr;
-	char				*helper_str;
-	int					helper_nbr;
 
 	chars_count = 0;
 	va_start(ptr, str);
@@ -36,40 +72,14 @@ int	ft_printf(const char *str, ...)
 				ft_putchar_fd('%', 1);
 				chars_count++;
 			}
-			else if (*str == 's' || *str == 'c')
-			{
-				helper_str = va_arg(ptr, char *);
-				if (helper_str == NULL && *str == 's')
-					helper_str = "(null)";
-				else if (helper_str == 0 && *str == 'c')
-				{
-					helper_str = "";
-					chars_count += 1;
-				}
-				ft_putstr_fd(helper_str, 1);
-				chars_count += ft_strlen(helper_str);
-			}
-			else if (*str == 'd' || *str == 'i')
-			{
-				helper_nbr = va_arg(ptr, int);
-				chars_count += ft_numberlen(helper_nbr);
-				ft_putnbr_fd(helper_nbr, 1);
-			}
-			else if (*str == 'X' || *str == 'x' || *str == 'p')
-			{
-				if (*str == 'p')
-				{
-					ft_putstr_fd("0x", 1);
-					chars_count += 2;
-				}
-				ft_nbrhexa(va_arg(ptr, int), &chars_count, *str);
-			}
+			else if (*str == 's')
+				caseof_s(va_arg(ptr, char *), &chars_count);
+			else if (*str == 'X' || *str == 'x' || *str == 'c' || *str == 'd' || *str == 'i')
+				caseof_xs_d_i(va_arg(ptr, int), &chars_count, *str);
+			else if (*str == 'p')
+				caseof_p(va_arg(ptr, unsigned long), &chars_count);
 			else if (*str == 'u')
-			{
-				helper_nbr = va_arg(ptr, unsigned int);
-				ft_putunbr_fd(helper_nbr, 1);
-				chars_count += ft_unumberlen(helper_nbr);
-			}
+				caseof_u(va_arg(ptr, unsigned int), &chars_count);
 		}
 		str++;
 	}

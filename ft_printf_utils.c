@@ -6,14 +6,14 @@
 /*   By: mohtakra <mohtakra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/13 21:45:36 by mohtakra          #+#    #+#             */
-/*   Updated: 2022/11/15 06:06:12 by mohtakra         ###   ########.fr       */
+/*   Updated: 2022/11/15 18:35:18 by mohtakra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
 /*return how many number in a number*/
-int	ft_numberlen(int nbr)
+int	ft_numberlen(long int nbr)
 {
 	int	len;
 
@@ -37,6 +37,8 @@ int	ft_unumberlen(unsigned int nbr)
 	int	len;
 
 	len = 0;
+	if (nbr == 0)
+		return (1);
 	while (nbr > 0)
 	{
 		nbr /= 10;
@@ -63,6 +65,28 @@ void	ft_nbrhexa(unsigned int nbr, int *countchars, char type)
 	{
 		ft_nbrhexa(nbr / 16, countchars, type);
 		ft_nbrhexa(nbr % 16, countchars, type);
+	}
+}
+
+void	ft_nbrhexa_p(unsigned long nbr, int *countchars)
+{
+	char	hexnum;
+
+	hexnum = "0123456789abcdef"[nbr % 16];
+	if (nbr >= 0 && nbr < 16)
+	{
+		ft_putchar_fd(hexnum, 1);
+		*countchars = *countchars + 1;
+	}
+	else if (nbr < 0)
+	{
+		ft_putchar_fd('-', 1);
+		ft_putnbr_fd(nbr *= -1, 1);
+	}
+	else
+	{
+		ft_nbrhexa_p(nbr / 16, countchars);
+		ft_nbrhexa_p(nbr % 16, countchars);
 	}
 }
 
