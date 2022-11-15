@@ -6,11 +6,12 @@
 /*   By: mohtakra <mohtakra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/13 21:45:36 by mohtakra          #+#    #+#             */
-/*   Updated: 2022/11/14 20:30:42 by mohtakra         ###   ########.fr       */
+/*   Updated: 2022/11/15 06:06:12 by mohtakra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libprintf.h"
+#include "ft_printf.h"
+
 /*return how many number in a number*/
 int	ft_numberlen(int nbr)
 {
@@ -22,6 +23,20 @@ int	ft_numberlen(int nbr)
 		len++;
 		nbr *= -1;
 	}
+	while (nbr > 0)
+	{
+		nbr /= 10;
+		len++;
+	}
+	return (len);
+}
+
+/*return how many number in an unsigned number*/
+int	ft_unumberlen(unsigned int nbr)
+{
+	int	len;
+
+	len = 0;
 	while (nbr > 0)
 	{
 		nbr /= 10;
@@ -48,5 +63,18 @@ void	ft_nbrhexa(unsigned int nbr, int *countchars, char type)
 	{
 		ft_nbrhexa(nbr / 16, countchars, type);
 		ft_nbrhexa(nbr % 16, countchars, type);
+	}
+}
+
+void	ft_putunbr_fd(unsigned int n, int fd)
+{
+	if (n >= 0 && n <= 9)
+	{
+		ft_putchar_fd(n + '0', fd);
+	}
+	else
+	{
+		ft_putunbr_fd(n / 10, fd);
+		ft_putunbr_fd(n % 10, fd);
 	}
 }
