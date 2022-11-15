@@ -1,23 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   libft.h                                            :+:      :+:    :+:   */
+/*   ft_strchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mohtakra <mohtakra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/15 05:48:25 by mohtakra          #+#    #+#             */
-/*   Updated: 2022/11/15 22:45:12 by mohtakra         ###   ########.fr       */
+/*   Created: 2022/11/15 20:40:41 by mohtakra          #+#    #+#             */
+/*   Updated: 2022/11/15 20:44:43 by mohtakra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LIBFT_H
-# define LIBFT_H
-# include <stdio.h>
-# include <unistd.h>
+#include "libft.h"
 
-size_t	ft_strlen(const char *s);
-void	ft_putchar_fd(char c, int fd);
-void	ft_putstr_fd(char *s, int fd);
-void	ft_putnbr_fd(int n, int fd);
-char	*ft_strchr(char *s, int c);
-#endif
+char	*ft_strchr(char *s, int c)
+{
+	char	*str;
+
+	str = s;
+	if (!s)
+		return (NULL);
+	while (*str && *str != (char)c)
+		str++;
+	if (*str == (char)c)
+		return (str);
+	return (NULL);
+}

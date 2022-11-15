@@ -6,13 +6,13 @@
 /*   By: mohtakra <mohtakra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/13 21:45:36 by mohtakra          #+#    #+#             */
-/*   Updated: 2022/11/15 18:35:18 by mohtakra         ###   ########.fr       */
+/*   Updated: 2022/11/15 22:45:35 by mohtakra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-/*return how many number in a number*/
+/*returns the len of a number*/
 int	ft_numberlen(long int nbr)
 {
 	int	len;
@@ -31,7 +31,7 @@ int	ft_numberlen(long int nbr)
 	return (len);
 }
 
-/*return how many number in an unsigned number*/
+/*returns the len of an unsigned number*/
 int	ft_unumberlen(unsigned int nbr)
 {
 	int	len;
@@ -47,7 +47,7 @@ int	ft_unumberlen(unsigned int nbr)
 	return (len);
 }
 
-/*convert a number to hexadecimal*/
+/*convert a number to hexadecimal with the interval of UINT*/
 void	ft_nbrhexa(unsigned int nbr, int *countchars, char type)
 {
 	char	hexnum;
@@ -68,6 +68,7 @@ void	ft_nbrhexa(unsigned int nbr, int *countchars, char type)
 	}
 }
 
+/*convert a number to hexadecimal with the interval of ULONG*/
 void	ft_nbrhexa_p(unsigned long nbr, int *countchars)
 {
 	char	hexnum;
