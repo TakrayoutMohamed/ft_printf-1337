@@ -6,7 +6,7 @@
 /*   By: mohtakra <mohtakra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/13 19:08:38 by mohtakra          #+#    #+#             */
-/*   Updated: 2022/11/16 00:28:37 by mohtakra         ###   ########.fr       */
+/*   Updated: 2022/11/18 17:22:59 by mohtakra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ int	ft_printf(const char *str, ...)
 
 	chars_count = 0;
 	va_start(ptr, str);
+	if (write(1, 0, 0) == -1)
+		return (-1);
 	while (*str)
 	{
 		if (*str != '%')
